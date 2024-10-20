@@ -190,7 +190,7 @@ const QueryInputScreen: React.FC = () => {
       const { output_audio, output_text } = response.data;
       console.log(response.data)
       // Set output text and decode audio
-      const transcribed_text=output_text? output_text[0]["transcribed_text"]: "No Text"
+      const transcribed_text=output_text? output_text: "No Text"
       setOutputText(transcribed_text);
       setEncodedOutputAudio(output_audio);
     } catch (error) {
