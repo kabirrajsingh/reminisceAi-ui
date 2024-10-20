@@ -1,10 +1,11 @@
+// app/_layout.tsx
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-
+import PhotoPreviewScreen from './PhotoPreviewScreen';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -23,7 +24,7 @@ export default function RootLayout() {
   }, [loaded]);
 
   if (!loaded) {
-    return null;
+    return null; // Return nothing until fonts are loaded
   }
 
   return (
@@ -31,7 +32,9 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
-      </Stack>
+        <Stack.Screen name="QueryInputScreen" options={{ title: 'Home Screen' }} />
+        <Stack.Screen name="PhotoPreviewScreen" options={{ title: 'Photo Preview' }} /> {/* Add the Photo Preview screen */}
+        </Stack>
     </ThemeProvider>
   );
 }

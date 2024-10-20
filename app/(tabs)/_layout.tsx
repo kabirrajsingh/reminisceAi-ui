@@ -1,37 +1,25 @@
-import { Tabs } from 'expo-router';
+// app/_layout.tsx
 import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import IndexScreen from './index'; // Your home screen
+import ExploreScreen from './explore'; // Your explore screen
+import HomeScreen from '../HomeScreen';
+import PictureScreen from '../PictureScreen';
+import PhotoPreviewScreen from '../PhotoPreviewScreen';
+import AudioScreen from '../AudioScreen';
+import QueryInputScreen from '../QueryInputScreen';
+const Tab = createBottomTabNavigator();
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+const AppLayout = () => {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
-        }}
-      />
-    </Tabs>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={QueryInputScreen} />
+        <Tab.Screen name="Upload" component={PictureScreen} />
+
+        {/* <Tab.Screen name="Explore" component={PhotoPreviewScreen} /> */}
+        <Tab.Screen name="Audio" component={AudioScreen} />
+      </Tab.Navigator>
   );
-}
+};
+
+export default AppLayout;
